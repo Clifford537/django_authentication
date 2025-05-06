@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Your Email</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; }
+        .otp { font-size: 24px; font-weight: bold; color: #2a9d8f; }
+        .footer { font-size: 12px; color: #888; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hello {{ user.first_name }},</h2>
+        <p>Your OTP for email verification is:</p>
+        <p class="otp">{{ user.otp }}</p>
+        <p>This OTP will expire in 10 minutes.</p>
+        <p>If you did not request this, ignore this email.</p>
+        <p class="footer">SwiftAuth | Secure Login System</p>
+    </div>
+</body>
+</html>

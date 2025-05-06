@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}Secured Swift Pay - Articles{% endblock %}
+
+{% block content %}
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            line-height: 1.8;
+        }
+
+        #articlis_articles {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .articlis_article-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            border-left: 5px solid #003366;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .articlis_article-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .articlis_article-container h2 {
+            color: #003366;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #003366;
+            padding-bottom: 5px;
+        }
+
+        .articlis_article-container p {
+            font-size: 16px;
+            color: #555;
+            text-align: justify;
+        }
+
+        .articlis_rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.3em;
+            color: #FFD700;
+            margin-top: 10px;
+        }
+
+        .articlis_alert {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            #articlis_articles {
+                padding: 15px;
+            }
+
+            .articlis_article-container {
+                padding: 15px;
+            }
+
+            .articlis_article-container h2 {
+                font-size: 20px;
+            }
+
+            .articlis_article-container p {
+                font-size: 14px;
+            }
+
+            .articlis_rating {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+
+<main>
+    <section id="articlis_articles">
+        <div class="articlis_article-container">
+            <h2>Our Developments</h2>
+            <p>Since our inception, Secured Swift Pay has been at the forefront of financial technology, continuously innovating to provide secure and efficient payment solutions. Our cutting-edge developments have revolutionized the way people transfer money, making it faster, safer, and more convenient.</p>
+            <div class="articlis_rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+        <div class="articlis_article-container">
+            <h2>Achievements Since 2009</h2>
+            <p>Over the past decade, Secured Swift Pay has achieved numerous milestones. From securing multiple industry awards to expanding our services globally, our commitment to excellence has been recognized and celebrated. Our user base has grown exponentially, reflecting the trust and confidence users have in our platform.</p>
+            <div class="articlis_rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+        <div class="articlis_article-container">
+            <h2>Our Dedicated Team</h2>
+            <p>Our success is driven by our dedicated team of professionals who bring their expertise and passion to work every day. From software engineers to customer support representatives, each member plays a crucial role in delivering exceptional service to our users. We believe in fostering a collaborative and inclusive work environment where everyone can thrive.</p>
+            <div class="articlis_rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+        <div class="articlis_article-container">
+            <h2>Our Transparency</h2>
+            <p>Transparency is one of our core values. We are committed to providing clear and honest information about our services, fees, and policies. Our users can trust that there are no hidden charges or surprises. We regularly update our platform and communicate openly with our users to ensure they have the best experience possible.</p>
+            <div class="articlis_rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+        <div class="articlis_article-container">
+            <h2>Good Customer Care</h2>
+            <p>At Secured Swift Pay, customer care is our top priority. Our dedicated support team is available 24/7 to assist with any inquiries or issues. We value feedback and continuously strive to improve our services based on user input. Our goal is to provide a seamless and satisfying experience for all our users.</p>
+            <div class="articlis_rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

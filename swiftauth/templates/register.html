@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - Swift Pay{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+<!-- Spinner Styles -->
+<style>
+    .spinner-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .spinner {
+        width: 80px;
+        height: 80px;
+        border: 8px solid white;
+        border-top: 8px solid #003366;
+        border-bottom: 8px solid #003366;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .d-none {
+        display: none;
+    }
+</style>
+
+<!-- Spinner -->
+<div id="loading-screen" class="spinner-overlay d-none">
+    <div class="spinner"></div>
+</div>
+
+<div class="container reg_container">
+    <div class="card reg_card">
+        <h2 class="text-center mb-4">User Registration</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} reg_alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger reg_alert">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li><strong>{{ field|title }}</strong>: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" onsubmit="showLoading(event)">
+            {% csrf_token %}
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">First Name</label>
+                <input type="text" name="first_name" class="form-control reg_input" placeholder="Enter first name" required>
+            </div>
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">Last Name</label>
+                <input type="text" name="last_name" class="form-control reg_input" placeholder="Enter last name" required>
+            </div>
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">Email</label>
+                <input type="email" name="email" class="form-control reg_input" placeholder="Enter email" required>
+            </div>
+            <div class="mb-3 form-group">
+                <label class="reg_label">Country</label>
+                <select id="countrySelect" name="country" class="form-control reg_input" required>
+                    <option value="">Select Country</option>
+                </select>
+            </div>
+            
+            <div class="mb-3 form-group">
+                <label class="reg_label">Phone</label>
+                <input type="text" id="phone" name="phone" class="form-control reg_input" placeholder="Enter phone number" required>
+            </div>
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">Birth Date</label>
+                <input type="date" name="date_of_birth" class="form-control reg_input" required>
+            </div>
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">ID Front</label>
+                <input type="file" name="national_id_front" class="form-control reg_file">
+            </div>
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">ID Back</label>
+                <input type="file" name="national_id_back" class="form-control reg_file">
+            </div>
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">Password</label>
+                <input type="password" name="password1" class="form-control reg_input" placeholder="Create password" required>
+            </div>
+
+            <div class="mb-3 form-group">
+                <label class="reg_label">Confirm Password</label>
+                <input type="password" name="password2" class="form-control reg_input" placeholder="Confirm password" required>
+            </div>
+
+            <button type="submit" class="btn reg_button">Submit</button>
+        </form>
+
+        <p class="mt-3 reg_text">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </p>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const countrySelect = document.getElementById("countrySelect");
+        const phoneInput = document.getElementById("phone");
+    
+        async function fetchCountries() {
+            try {
+                const response = await fetch("{% static 'data/countries.json' %}");
+                const countries = await response.json();
+    
+                countries
+                    .map(country => ({
+                        name: country.name.common,
+                        dialCode: country.idd?.root 
+                            ? (country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : "")) 
+                            : ""
+                    }))
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .forEach(country => {
+                        if (country.dialCode) {
+                            const option = document.createElement("option");
+                            option.value = country.dialCode;
+                            option.textContent = `${country.name} (${country.dialCode})`;
+                            countrySelect.appendChild(option);
+                        }
+                    });
+    
+            } catch (error) {
+                console.error("Error loading countries.json:", error);
+            }
+        }
+    
+        countrySelect.addEventListener("change", function () {
+            const dialCode = this.value;
+            if (dialCode) {
+                phoneInput.value = dialCode + " ";
+            } else {
+                phoneInput.value = "";
+            }
+        });
+    
+        phoneInput.addEventListener("input", function () {
+            const dialCode = countrySelect.value;
+            if (dialCode && !this.value.startsWith(dialCode)) {
+                this.value = dialCode + " ";
+            }
+        });
+    
+        fetchCountries();
+    });
+    </script>
+    
+{% endblock %}

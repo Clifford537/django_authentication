@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Withdrawal Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            padding: 40px 0;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            text-align: center;
+        }
+        h2 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2E86C1;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Withdrawal Request Successful ✅</h2>
+        <p>Dear <strong>{{ user.first_name }}</strong>,</p>
+        <p>Your withdrawal request of <span class="amount">${{ amount }}</span> has been successfully processed.</p>
+        <p>The amount will reflect in your account within <strong>{{ processing_time }}</strong>.</p>
+        <p>We appreciate your trust in our service, and we’re here to make sure you have a smooth experience every step of the way. If you have any questions, feel free to reach out to our support team.</p>
+
+        <a href="mailto:support@swiftauth.com" class="button">Contact Support</a>
+
+        <div class="footer">
+            <p>Thank you for choosing <strong>SwiftAuth</strong>. We value you as our customer! 🌟</p>
+            <p>Best regards,<br><strong>The SwiftAuth Team</strong></p>
+        </div>
+    </div>
+</body>
+</html>

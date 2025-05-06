@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Secured Swift Pay{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Inline CSS -->
+    <style>
+        /* Spinner Styles */
+        .spinner-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 100px;
+            height: 100px;
+            border: 10px solid white;
+            border-top: 10px solid #003366;
+            border-bottom: 10px solid #003366;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .d-none {
+            display: none;
+        }
+    </style>
+</head>
+<body id="body-container">
+
+    <!-- Full-Page Loading Spinner -->
+    <div id="loading-screen" class="spinner-overlay d-none">
+        <div class="spinner"></div>
+    </div>
+
+    <header id="header">
+        <nav id="nav-bar">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+                <a href="#" class="brand">Secured Swift Pay</a>
+            </div>
+            <ul id="nav-menu">
+                <button class="close-menu" id="close-menu">&times;</button>
+                <li><a href="{% url 'dashboard' %}" class="show-spinner">Home</a></li>
+                <li><a href="{% url 'privacy_policy' %}" class="show-spinner">Privacy</a></li>
+                <li><a href="{% url 'about_us' %}" class="show-spinner">About Us</a></li>
+                <li><a href="{% url 'faq' %}" class="show-spinner">FAQ</a></li>
+                <li><a href="{% url 'terms' %}" class="show-spinner">Terms & Conditions</a></li>
+                <li><a href="{% url 'articles' %}" class="show-spinner">Articles</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer id="footer">
+        <p>Licensed by Global Monetary Exchange And America Anti-Illegal Money Transfer & Co</p>
+        <p>Registration number MFN58591H46891</p>
+        <p>© 2025 Secured Swift Pay</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function showLoading(event, url = null) {
+            event.preventDefault(); // Stop the action from happening immediately
+        
+            document.getElementById("loading-screen").classList.remove("d-none"); // Show spinner
+        
+            const delay = document.referrer ? 1200 : 1700; // 1.2s for back navigation, 1.7s for normal
+        
+            setTimeout(function () {
+                if (url) {
+                    window.location.href = url; // Navigate after delay
+                } else {
+                    event.target.submit(); // Submit form after delay
+                }
+            }, delay);
+        }
+        
+        // Attach spinner behavior to all buttons & links that trigger navigation
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".show-spinner").forEach(element => {
+                element.addEventListener("click", function (event) {
+                    showLoading(event, this.href);
+                });
+            });
+        
+            document.querySelectorAll("form").forEach(form => {
+                form.addEventListener("submit", showLoading);
+            });
+        });
+
+        // Hide spinner instantly if navigating back from cache
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) { 
+                document.getElementById("loading-screen").classList.add("d-none");
+            }
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            document.getElementById("nav-menu").classList.add("active");
+        });
+
+        document.getElementById("close-menu").addEventListener("click", function () {
+            document.getElementById("nav-menu").classList.remove("active");
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+/* General body styling */
+#body-container {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header styling */
+#header {
+    background-color: #003366;
+    color: white;
+    padding: 15px 0;
+}
+
+/* Navigation bar */
+#nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation left container (Menu + Brand) */
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Brand */
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+/* Navigation Menu */
+#nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-menu li {
+    display: inline;
+}
+
+#nav-menu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    transition: 0.3s;
+}
+
+#nav-menu li a:hover {
+    background-color: #0055a5;
+    border-radius: 5px;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Close button */
+.close-menu {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #nav-bar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .brand {
+        margin-left: 10px;
+        font-size: 1.3rem;
+    }
+
+    #nav-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: #003366;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 20px;
+        display: flex;
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;  /* Ensures the menu is on top */
+    }
+
+    #nav-menu.active {
+        left: 0;
+    }
+
+    #nav-menu li {
+        display: block;
+        margin: 15px 0;
+    }
+
+    /* Close button inside mobile menu */
+    .close-menu {
+        display: block;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        align-self: flex-end;
+        margin-right: 10px;
+    }
+
+    /* Year at the bottom of the menu */
+    .menu-year {
+        margin-top: auto;
+        padding: 15px;
+        font-size: 14px;
+        color: white;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+
+/* Main content */
+#main-content {
+    flex-grow: 1;
+    padding: 20px;
+    text-align: center;
+    z-index: 1; 
+}
+
+/* Footer styling */
+#footer {
+    background-color: #f1f1f1;
+    color: #333;
+    text-align: center;
+    padding: 15px;
+}
+
+
+
+
+
+
+
+/* Login Page Styling */
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.login-card {
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.form-control {
+    border-radius: 8px;
+}
+
+.alert {
+    border-radius: 8px;
+}
+
+/* dashboard */
+
+/* Header Icons & Buttons */
+.d-flex .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #ddd;
+    position: relative;
+    transition: 0.3s;
+}
+
+.d-flex .btn i {
+    font-size: 20px;
+    color: #333;
+}
+
+.d-flex .btn:hover {
+    background: #e9ecef;
+}
+
+/* Notification Counter */
+#notification-count {
+    font-size: 12px;
+    padding: 4px 7px;
+    border-radius: 50%;
+    top: -5px;
+    right: -5px;
+}
+
+/* Balance Section */
+#balance-text {
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #343a40;
+}
+
+/* Eye Icon for Balance */
+#toggle-balance {
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#toggle-balance:hover {
+    color: #007bff;
+}
+
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger:hover {
+    background-color: #b30000;
+}
+
+/* Transaction History */
+.transaction-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Credit (Deposit) & Debit (Withdrawal) Colors */
+.credit {
+    color: green;
+    font-weight: bold;
+}
+
+.debit {
+    color: red;
+    font-weight: bold;
+}
+
+/* Notification Modal */
+.modal-content {
+    border-radius: 10px;
+}
+.list-group-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Alert messages for success and error */
+.reg_alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Success message */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Error message */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Error messages for specific fields */
+.text-danger {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h3 {
+        font-size: 20px;
+    }
+    
+    .d-flex .btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .transaction-card {
+        font-size: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+

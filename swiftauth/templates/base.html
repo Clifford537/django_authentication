@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title with Icon -->
+    <title>{% block title %}Secured Swift Pay{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/swift.png' %}" type="image/png">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Global secure payments, fast transfers, anti-fraud technology.">
+
+    <!-- Open Graph (for Facebook, LinkedIn, etc.) -->
+    <meta property="og:title" content="Secured Swift Pay">
+    <meta property="og:description" content="Global secure payments, fast transfers, anti-fraud technology.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'img/swift.png' %}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secured Swift Pay">
+    <meta name="twitter:description" content="Global secure payments, fast transfers, anti-fraud technology.">
+    <meta name="twitter:image" content="{% static 'img/swift.png' %}">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+        /* Spinner Styles */
+        .spinner-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 100px;
+            height: 100px;
+            border: 10px solid white;
+            border-top: 10px solid #003366;
+            border-bottom: 10px solid #003366;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        .logo-img {
+            height: 30px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+    </style>
+</head>
+
+<body id="body-container">
+    <!-- Spinner -->
+    <div id="loading-screen" class="spinner-overlay d-none">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header & Nav -->
+    <header id="header">
+        <nav id="nav-bar">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+                <a href="{% url 'login' %}" class="brand">
+                    <img src="{% static 'img/swift.png' %}" alt="Logo" class="logo-img">
+                    Secured Swift Pay
+                </a>
+                
+            </div>
+            <ul id="nav-menu">
+                <button class="close-menu" id="close-menu">&times;</button>
+                <li><a href="{% url 'login' %}" class="show-spinner">Home</a></li>
+                <li><a href="{% url 'register' %}" class="show-spinner">Sign-Up</a></li>
+                <li><a href="{% url 'privacy_policy' %}" class="show-spinner">Privacy</a></li>
+                <li><a href="{% url 'about_us' %}" class="show-spinner">About Us</a></li>
+                <li><a href="{% url 'faq' %}" class="show-spinner">FAQ</a></li>
+                <li><a href="{% url 'terms' %}" class="show-spinner">Terms</a></li>
+                <li><a href="{% url 'articles' %}" class="show-spinner">Articles</a></li>
+                <li class="menu-year d-lg-none">© 2009-2025 Secured Swift Pay</li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p>Licensed by Global Monetary Exchange And America Anti-Illegal Money Transfer & Co</p>
+        <p>Registration number MFN58591H46891</p>
+        <p>© 2025 Secured Swift Pay</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        let isNavigationTriggered = false;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!isNavigationTriggered) {
+                document.getElementById("loading-screen").classList.remove("d-none");
+                window.onload = function () {
+                    document.getElementById("loading-screen").classList.add("d-none");
+                };
+            }
+
+            document.querySelectorAll(".show-spinner").forEach(element => {
+                element.addEventListener("click", function (event) {
+                    showLoading(event, this.href);
+                });
+            });
+
+            document.querySelectorAll("form").forEach(form => {
+                form.addEventListener("submit", showLoading);
+            });
+        });
+
+        function showLoading(event, url = null) {
+            event.preventDefault();
+            if (isNavigationTriggered) return;
+
+            isNavigationTriggered = true;
+            document.getElementById("loading-screen").classList.remove("d-none");
+
+            setTimeout(function () {
+                if (url) {
+                    window.location.href = url;
+                } else {
+                    event.target.submit();
+                }
+            }, 1300);
+        }
+
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                document.getElementById("loading-screen").classList.add("d-none");
+                isNavigationTriggered = false;
+            }
+        });
+
+        // Mobile nav
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            document.getElementById("nav-menu").classList.add("active");
+        });
+
+        document.getElementById("close-menu").addEventListener("click", function () {
+            document.getElementById("nav-menu").classList.remove("active");
+        });
+    </script>
+</body>
+</html>

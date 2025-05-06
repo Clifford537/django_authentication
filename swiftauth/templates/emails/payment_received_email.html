@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Received</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            padding: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+        .footer {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Payment Received</div>
+        <div class="content">
+            <p>Hello {{ user.email }},</p>
+            <p>You have received a payment of <strong>${{ amount }}</strong> from <strong>{{ sender_name }}</strong>.</p>
+            <p>You can check your updated balance in your account.</p>
+            <a href="https://babunews.shop/dashboard" class="button">Check Balance</a>
+        </div>
+        <div class="footer">
+            <p>Best regards,</p>
+            <p><strong>Swift Pay Support Team</strong></p>
+        </div>
+    </div>
+</body>
+</html>

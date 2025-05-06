@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="privacy-container">
+    <h2 class="text-center">Privacy Policy</h2>
+    <p class="text-center">
+        Your privacy is our priority. We ensure that all user data is handled securely and transparently.
+    </p>
+
+    <ul class="privacy-list">
+        <li><strong>Data Collection:</strong> We collect only necessary personal information such as email, phone number, and national ID images.</li>
+        <li><strong>Data Usage:</strong> Personal data is used strictly for account verification, transaction processing, and service improvement.</li>
+        <li><strong>Data Security:</strong> We implement robust security measures to prevent unauthorized access and data loss.</li>
+        <li><strong>Third-Party Access:</strong> We do not share user data with third parties, except for payment processing or legal requirements.</li>
+        <li><strong>User Consent:</strong> By using our platform, you consent to the collection and use of your data as outlined in this policy.</li>
+        <li><strong>Data Retention:</strong> Personal information is retained as long as necessary to provide our services or as required by law.</li>
+        <li><strong>Account Deactivation:</strong> Users can request account deactivation, and data will be removed within 30 days.</li>
+        <li><strong>Children's Privacy:</strong> Our services are not intended for users under 18, and we do not collect data from minors.</li>
+        <li><strong>Policy Updates:</strong> This policy may be updated periodically, with notifications for significant changes.</li>
+        <li><strong>Contact Us:</strong> For privacy-related inquiries, email us at <a href="mailto:privacy@securedswiftpay.com">privacy@securedswiftpay.com</a>.</li>
+    </ul>
+</div>
+
+<style>
+    .privacy-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h2 {
+        color: #003366;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .privacy-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .privacy-list li {
+        font-size: 16px;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    @media (max-width: 768px) {
+        .privacy-container {
+            margin: 20px;
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        p, .privacy-list li {
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}

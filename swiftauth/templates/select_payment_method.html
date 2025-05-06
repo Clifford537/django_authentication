@@ -1,0 +1,76 @@
+{% extends "dash.html" %}
+
+{% block content %}
+<div class="activation-container">
+    <h2>Pay Activation Fee - $2.40</h2>
+    <p>Select where to receive your Money.</p>
+
+    <div id="paypal-container-JNR6D4NY4XHWY"></div>
+
+    <form method="POST" class="payment-form">
+        {% csrf_token %}
+        <h3>Select Payment Method</h3>
+        
+        <label class="radio-label">
+            <input type="radio" name="payment_method" value="card" required> Withdraw to Card
+        </label>
+        
+        <label class="radio-label">
+            <input type="radio" name="payment_method" value="bank" required> Withdraw to Bank
+        </label>
+
+        <button type="submit" class="proceed-btn">Proceed</button>
+    </form>
+</div>
+<style>
+    .activation-container {
+        max-width: 400px;
+        margin: 50px auto;
+        text-align: center;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #333;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .payment-form {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .radio-label {
+        display: block;
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 10px;
+    }
+
+    .proceed-btn {
+        width: 100%;
+        padding: 10px;
+        background: #0070ba;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    .proceed-btn:hover {
+        background: #005ea6;
+    }
+</style>
+{% endblock %}

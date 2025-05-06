@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Header Section -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Welcome, {{ user.first_name }}</h2>
+            <div class="d-flex align-items-center">
+                <!-- Notifications Button -->
+                <button class="btn icon-btn me-3 position-relative" data-bs-toggle="modal" data-bs-target="#notificationsModal">
+                    <i class="bi bi-bell text-warning"></i>
+                    <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                        {{ notifications|length }}
+                    </span>
+                </button>
+        
+                <!-- Settings Button -->
+                <button class="btn icon-btn me-3">
+                    <i class="bi bi-gear text-primary"></i>
+                </button>
+        
+                <!-- Logout Button as Icon -->
+                <a href="{% url 'logout' %}" class="btn icon-btn">
+                    <i class="bi bi-box-arrow-right text-danger"></i>
+                </a>
+            </div>
+        </div>
+        
+
+        <!-- Balance Section -->
+        <div class="text-center mt-3">
+            <h3>
+                Balance: $<span id="balance-amount">{{ account.balance }}</span>
+                <button class="btn icon-btn" id="toggle-balance">
+                    <i class="bi bi-eye-slash text-dark"></i>
+                </button>
+            </h3>
+        </div>
+
+        <!-- Withdraw & Transfer Buttons -->
+        <div class="text-center mt-3">
+            <a href="{% url 'withdraw' %}" class="btn btn-danger">Withdraw</a>
+            <a href="{% url 'transfer' %}" class="btn btn-primary">Send Money</a>
+        </div>
+
+        <!-- Notifications Modal -->
+        <div class="modal fade" id="notificationsModal" tabindex="-1" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notificationsModalLabel">Notifications</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            {% for notification in notifications %}
+                            <li class="list-group-item">{{ notification.message }}</li>
+                            {% empty %}
+                            <li class="list-group-item text-muted">No new notifications.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saved Payment Methods -->
+        <h4 class="mt-4">Saved Payment Methods</h4>
+        <div class="row">
+            {% if account.credit_card_number %}
+            <div class="col-md-6">
+                <div class="card p-3 mb-3">
+                    <strong>**** **** **** {{ account.credit_card_number|slice:"-4:" }}</strong>
+                    <p>Exp: {{ account.credit_card_expiry }}</p>
+                    <form method="POST" action="{% url 'delete_credit_card' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-muted">No credit card added.</p>
+            {% endif %}
+
+            {% if account.account_number %}
+            <div class="col-md-6">
+                <div class="card p-3 mb-3">
+                    <strong>{{ account.bank_name }}</strong>
+                    <p>Acc: ****{{ account.account_number|slice:"-4:" }}</p>
+                    <form method="POST" action="{% url 'delete_bank_account' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-muted">No bank account added.</p>
+            {% endif %}
+        </div>
+
+        <!-- Add Payment Method -->
+        <h4 class="mt-4">Add Payment Method</h4>
+        <form method="POST" action="{% url 'add_payment_method' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Add Credit Card</h5>
+                    <input type="text" name="credit_card_number" class="form-control mb-2" placeholder="Card Number" required>
+                    <input type="text" name="credit_card_cvv" class="form-control mb-2" placeholder="CVV" required>
+                    <input type="month" name="credit_card_expiry" class="form-control mb-2" required>
+                </div>
+                <div class="col-md-6">
+                    <h5>Add Bank Account</h5>
+                    <input type="text" name="bank_name" class="form-control mb-2" placeholder="Bank Name" required>
+                    <input type="text" name="account_number" class="form-control mb-2" placeholder="Account Number" required>
+                    <input type="text" name="routing_number" class="form-control mb-2" placeholder="Routing Number" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Save Payment Method</button>
+        </form>
+
+        <!-- Transaction History -->
+        <h4 class="mt-4">Transaction History</h4>
+        <div class="list-group">
+            {% for transaction in transactions reversed %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ transaction.timestamp|date:"Y-m-d" }}</strong>
+                    <span class="{% if transaction.transaction_type == 'deposit' %}text-success{% else %}text-danger{% endif %}">
+                        {% if transaction.transaction_type == 'deposit' %}
+                            +${{ transaction.amount }}
+                        {% else %}
+                            -${{ transaction.amount }}
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="text-muted">
+                    {% if transaction.transaction_type == 'transfer' %}
+                        Sent to {{ transaction.recipient.email }}
+                    {% elif transaction.transaction_type == 'deposit' %}
+                        Received from {{ transaction.sender.email|default:"External Source" }}
+                    {% else %}
+                        Withdrawn
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-muted">No transactions found.</p>
+            {% endfor %}
+        </div>
+        
+
+    <script>
+        $(document).ready(function () {
+            // Toggle Balance Visibility
+            $("#toggle-balance").click(function () {
+                let balance = $("#balance-amount");
+                let icon = $(this).find("i");
+
+                if (balance.is(":visible")) {
+                    balance.hide();
+                    icon.removeClass("bi-eye-slash").addClass("bi-eye");
+                } else {
+                    balance.show();
+                    icon.removeClass("bi-eye").addClass("bi-eye-slash");
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

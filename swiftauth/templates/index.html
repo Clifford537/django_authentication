@@ -1,0 +1,199 @@
+{% load static%}
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title with Icon -->
+    <title>{% block title %}Secured Swift Pay{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/swift.png' %}" type="image/png">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Global secure payments, fast transfers, anti-fraud technology.">
+
+    <!-- Open Graph (for Facebook, LinkedIn, etc.) -->
+    <meta property="og:title" content="Secured Swift Pay">
+    <meta property="og:description" content="Global secure payments, fast transfers, anti-fraud technology.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'img/swift.png' %}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secured Swift Pay">
+    <meta name="twitter:description" content="Global secure payments, fast transfers, anti-fraud technology.">
+    <meta name="twitter:image" content="{% static 'img/swift.png' %}">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero-section {
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-section h1 {
+            color: #003366;
+        }
+
+        .content-container {
+            padding: 20px;
+        }
+
+        .feature {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f1f1f1;
+        }
+
+        .feature h2 {
+            color: #003366;
+        }
+
+        .cta {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .cta button {
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .cta button:hover {
+            background-color: #002244;
+        }
+
+        footer {
+            background-color: #f1f1f1;
+            color: #333;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .brand-container {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Centers the brand-link horizontally */
+            padding: 20px 0;
+        }
+        
+        .brand-link {
+            display: flex;
+            align-items: center; /* Aligns logo and title vertically */
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 40px; /* Adjust size as needed */
+            margin-right: 10px;
+        }
+        
+        .brand-title {
+            font-size: 24px;
+            color:rgb(255, 255, 255); /* Bootstrap blue */
+            margin: 0;
+            font-weight: 600;
+            white-space: nowrap; /* Prevents text from wrapping */
+        }
+        
+        
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+    <div class="brand-container">
+        <a href="{% url 'login' %}" class="brand-link">
+            <img src="{% static 'img/swift.png' %}" alt="Logo" class="logo-img">
+            <h2 class="brand-title">Secured Swift Pay</h2>
+        </a>
+    </div>    
+    
+   <nav>
+        <ul>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+    </nav>
+  </header> 
+  <main> 
+   <section class="hero-section"> 
+    <h1>Welcome to Secured Swift Pay</h1> 
+    <p>Connecting buyers and sellers securely, with speed and peace of mind.</p> 
+   </section> 
+   <div class="content-container"> 
+    <div class="feature"> 
+     <h2>Withdraw Money Easily</h2> 
+     <p>You can easily withdraw your money to your Mobile banking accounts, and use it whenever, wherever you like.</p> 
+    </div> 
+    <div class="feature"> 
+     <h2>To get started</h2> 
+     <ol> 
+      <li>Securely sign up with just an email address and password.</li> 
+     </ol> 
+    </div> 
+    <div class="feature"> 
+     <h2>Join 100M Active Accounts Worldwide</h2> 
+     <p>Join millions of satisfied users. Shop with peace of mind, knowing Secured Buyer Protection has got you covered.</p> 
+     <p><a href="about_us.html">Learn more about security.</a></p> 
+    </div> 
+    <div class="feature"> 
+     <h2>Transact across Devices, Worldwide</h2> 
+     <p>With just one account, you can shop at millions of merchants around the world. Use any of your devices to manage your account on the go.</p> 
+    </div> 
+    <div class="feature"> 
+     <h2>Free to Use</h2> 
+     <p>It’s free to open a Secured Swift Pay account and buy something unless it involves a currency conversion. Fees may apply for other transactions.</p> 
+     <p><a href="about_us.html">More about fees.</a></p> 
+    </div> 
+    <div class="cta"> 
+     <h2>Sign Up and Get Started</h2> 
+     <a href="{% url 'register' %}"><button>Get Started</button></a> 
+    </div> 
+   </div> 
+  </main> 
+  <footer> 
+   <p>Licensed by Global Monetary Exchange And America Anti-Illegal Money Transfer &amp; Co</p> 
+   <p>Registration number MFN58591H46891</p> 
+   <p>©2009;- 2025 Secured Swift Pay</p> 
+  </footer> 
+ </body>
+</html>

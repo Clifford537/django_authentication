@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="about-container">
+    <h2 class="text-center">About Secured Swift Pay</h2>
+    <p class="text-center">
+        Secured Swift Pay is a leading platform dedicated to secure and swift money transfers, focusing on user privacy and convenience. 
+        Our mission is to provide a seamless and secure experience for our users.
+    </p>
+
+    <h4 class="mt-4">Why Choose Us?</h4>
+    <ul class="about-list">
+        <li><strong>User Privacy:</strong> We prioritize user privacy and ensure that personal information is protected.</li>
+        <li><strong>Secure Transactions:</strong> All transactions are encrypted and secure, protecting users from fraud and unauthorized access.</li>
+        <li><strong>Global Reach:</strong> Our platform supports transactions across multiple countries, making it convenient for users worldwide.</li>
+        <li><strong>Easy Account Management:</strong> Users can easily manage their accounts, add or remove bank cards, and view transaction history.</li>
+        <li><strong>Cryptocurrency Support:</strong> We support crypto payments for added flexibility and security.</li>
+        <li><strong>Responsive Design:</strong> Our platform is designed to work well on all devices, ensuring a seamless experience.</li>
+        <li><strong>24/7 Customer Support:</strong> Our dedicated support team is available around the clock to assist users with any issues.</li>
+        <li><strong>Transparent Policies:</strong> We maintain clear and transparent policies to build trust with our users.</li>
+        <li><strong>Compliance:</strong> We comply with all relevant regulations and laws to ensure a safe and legal service.</li>
+        <li><strong>Innovative Features:</strong> We continuously innovate and add new features to enhance user experience.</li>
+        <li><strong>Community Focus:</strong> We value our user community and regularly gather feedback to improve our services.</li>
+        <li><strong>Environmental Responsibility:</strong> We are committed to sustainable practices and reducing our environmental impact.</li>
+    </ul>
+</div>
+
+<style>
+    .about-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h2, h4 {
+        color: #003366;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .about-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .about-list li {
+        font-size: 16px;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    @media (max-width: 768px) {
+        .about-container {
+            margin: 20px;
+            padding: 15px;
+        }
+
+        h2, h4 {
+            font-size: 20px;
+        }
+
+        p, .about-list li {
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}
